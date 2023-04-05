@@ -4,4 +4,4 @@ Vamos con ese proyecto, cuando cueste a no decaer y levantar la cabeza!
 ---poner fondo de pantalla con huellas de perros y huesos
 
 
-vamos 25 minutos
+vamos 40 minutos
