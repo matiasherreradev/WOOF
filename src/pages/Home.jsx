@@ -46,9 +46,9 @@ export default function Home() {
         </h1>
       ) : (
         <>
-          <section className="p-2 max-w-8xl mx-auto overflow-y-scroll scroll-behavior-smooth">
+          <section className=" bg-(url(https://img.freepik.com/vector-gratis/fondo-patron-huesos-huellas_1374-18.jpg?w=826&t=st=1680838505~exp=1680839105~hmac=135e97a210943ec74d2c97b5d6c1b425658627863f569ad96a9cb13f6b4b6717)) p-2 max-w-8xl mx-auto overflow-y-scroll scroll-behavior-smooth z-10 bgopa ">
             <div className="text-center">
-              <h1 className="flex items-center justify-center text-amber-700 text-center text-3xl px-5  font-bold lg:text-5xl">
+              <h1 className="flex items-center justify-center text-amber-700 text-center text-3xl px-6 py-6 font-bold lg:text-5xl">
                 firulApp
               </h1>
               <p className="my-6 text-slate-500">
@@ -85,19 +85,19 @@ export default function Home() {
                     key={dog.id}
                     className="bg-slate-300 p-2 rounded-lg hover:bg-red-400 transition-all duration-200"
                   >
-                    {/* IMAGENES DE PERRO */}
+                    {/* IMAGENES DE PERRO (tarjetas)*/}
 
                     <article>
                       <img
                         src={dog.image.url}
                         alt={dog.name}
                         loading="lazy"
-                        className="rounded-lg md:h-72 md:w-full object-cover"
+                        className="rounded-lg md:h-72 md:w-full object-scale-down py-4 "
                       />
                       <h3 className="my-2 text-center font-bold text-lg">
                         {dog.name}{" "}
                       </h3>
-                      <p className="bg-slate-600 text-center text-white py-2">
+                      <p className="bg-slate-600 text-center text-white py-4">
                         Bred For: {dog.bred_for}
                       </p>
                     </article>

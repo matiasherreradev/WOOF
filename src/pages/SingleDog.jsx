@@ -23,7 +23,7 @@ export default function SingleDog() {
 
   return (
     <>
-      <section className="max-w-5xl mx-auto flex items-center justify-center h-screen">
+      <section className="   max-w-5xl  flex items-center justify-center 2xl:h-screen mx-auto z-10">
         {dog.map((item) => (
           <div
             key={item.id}
@@ -32,8 +32,8 @@ export default function SingleDog() {
 
 {/* IMAGEN DEL PERRO SELECCIONADO*/}
 
-            <article>
-              <img
+            <article className="grid items-center justify-center ">
+              <img className=""
                 src={`https://cdn2.thedogapi.com/images/${item.reference_image_id}.jpg`}
                 alt={item.name}
               />
