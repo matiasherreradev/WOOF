@@ -16,14 +16,16 @@ export default function Home() {
       } catch (error) {
         console.log(error);
       }
-    }
+    };
     setSearched(false);
     fetchDogData();
-  }, [])
+  }, []);
 
   const searchForDog = async () => {
     try {
-      const res = await fetch(`https://api.thedogapi.com/v1/breeds/search?q=${text}`);
+      const res = await fetch(
+        `https://api.thedogapi.com/v1/breeds/search?q=${text}`
+      );
       const data = await res.json();
       setDogs(data);
     } catch (error) {
@@ -41,32 +43,24 @@ export default function Home() {
   return (
     <>
       {!dogs ? (
-        <h1 className="flex items-center justify-center text-sky-700 text-center text-3xl px-5 h-screen font-bold uppercase">
+        <h1 className="flex items-center justify-center text-white text-center text-3xl px-5 h-screen font-bold uppercase">
           Loading...
         </h1>
       ) : (
         <>
-          <section className=" bg-(url(https://img.freepik.com/vector-gratis/fondo-patron-huesos-huellas_1374-18.jpg?w=826&t=st=1680838505~exp=1680839105~hmac=135e97a210943ec74d2c97b5d6c1b425658627863f569ad96a9cb13f6b4b6717)) p-2 max-w-8xl mx-auto overflow-y-scroll scroll-behavior-smooth z-10 bgopa ">
+          <section>
             <div className="text-center">
-              <h1 className="flex items-center justify-center text-amber-700 text-center text-3xl px-6 py-6 font-bold lg:text-5xl">
-                firulApp
+              <h1 className="flex items-center justify-center text-white text-center text-3xl px-6 py-6 font-bold lg:text-5xl">
+                WOOF!
               </h1>
-              <p className="my-6 text-slate-500">
-                This app is powered by{" "}
-                <a
-                  className="text-indigo-700 underline active:text-orange-500"
-                  href="https://thedogapi.com"
-                >
-                  The dog API
-                </a>
-              </p>
+            
 
               {/*BUSQUEDA DE RAZAS DE PERRO*/}
 
               <form onSubmit={HandleSubmit} className="mx-auto max-w-xl my-12">
                 <input
                   autoComplete="off"
-                  className="w-full rounded-md shadow-md px-4 py-2 text-  bg-orange-200 text-amber-950"
+                  className="w-full rounded-md shadow-md px-4 py-2 text-  bg-black text-white"
                   type="text"
                   name="search"
                   id="search"
@@ -83,7 +77,7 @@ export default function Home() {
                   <Link
                     to={`/${dog.name}`}
                     key={dog.id}
-                    className="bg-slate-300 p-2 rounded-lg hover:bg-red-400 transition-all duration-200"
+                    className="bg-slate-300 p-2 rounded-lg hover:bg-white transition-all duration-200"
                   >
                     {/* IMAGENES DE PERRO (tarjetas)*/}
 
@@ -109,15 +103,16 @@ export default function Home() {
                     <Link
                       to={`/${dog.name}`}
                       key={dog.id}
-                      className="bg-slate-300 p-2 rounded-lg hover:bg-red-400 transition-all duration-200"
+                      className="bg-slate-300 p-2 rounded-lg hover:bg-black transition-all duration-200"
                     >
                       {/* IMAGENES DE PERRO */}
 
                       <article>
-                      <img className="rounded-lg md:h-72 md:w-full object-cover"
-                src={`https://cdn2.thedogapi.com/images/${dog.reference_image_id}.jpg`}
-                alt={dog.name}
-              />
+                        <img
+                          className="rounded-lg md:h-72 md:w-full object-cover"
+                          src={`https://cdn2.thedogapi.com/images/${dog.reference_image_id}.jpg`}
+                          alt={dog.name}
+                        />
                         <h3 className="my-2 text-center font-bold text-lg">
                           {dog.name}{" "}
                         </h3>
@@ -129,6 +124,15 @@ export default function Home() {
                   ))}
                 </>
               )}
+                <p className="my-6 text-slate-500 flex items-center justify-center ">
+                This app is powered by{" "}
+                <a
+                  className="text-indigo-700 underline active:text-orange-500 "
+                  href="https://thedogapi.com"
+                >
+                  The dog API
+                </a>
+              </p>
             </div>
           </section>
         </>

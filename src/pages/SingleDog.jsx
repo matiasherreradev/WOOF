@@ -23,7 +23,7 @@ export default function SingleDog() {
 
   return (
     <>
-      <section className="   max-w-5xl  flex items-center justify-center 2xl:h-screen mx-auto z-10">
+      <section className="  text-white max-w-5xl  flex items-center justify-center 2xl:h-screen mx-auto z-10">
         {dog.map((item) => (
           <div
             key={item.id}
@@ -38,8 +38,8 @@ export default function SingleDog() {
                 alt={item.name}
               />
             </article>
-            <article>
-              <h1 className="font-bold text-2xl md:text-3xl text-amber-900 lg:text-4xl mb-8">
+            <article className="">
+              <h1 className=" text-2xl font-bold  md:text-3xl text-white lg:text-4xl mb-8 ">
                 {item.name}
               </h1>
               {item.description && (

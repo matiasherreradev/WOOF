@@ -3,8 +3,10 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      scrollBehavior: ["responsive"],
-    },
+      fontFamily: {
+        'sans': ['Montserrat', 'Lato', 'sans-serif'],
+      }
   },
   plugins: [],
-};
+}
+}
