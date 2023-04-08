@@ -6,6 +6,7 @@ export default function Home() {
   const [dogs, setDogs] = useState([]);
   const [text, setText] = useState("");
   const [searched, setSearched] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const fetchDogData = async () => {
@@ -20,6 +21,10 @@ export default function Home() {
     setSearched(false);
     fetchDogData();
   }, []);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searched]);
 
   const searchForDog = async () => {
     try {
@@ -39,6 +44,29 @@ export default function Home() {
     searchForDog();
     setSearched(true);
   };
+  
+
+  const indexOfLastDog = currentPage * 9;
+  const indexOfFirstDog = indexOfLastDog - 9;
+  const currentDogs = dogs.slice(indexOfFirstDog, indexOfLastDog);
+  const pageNumbers = [];
+
+  for (let i = 1; i <= Math.ceil(dogs.length / 9); i++) {
+    pageNumbers.push(i);
+  }
+
+  const renderPageNumbers = pageNumbers.map((number) => {
+    return (
+      <li
+        key={number}
+        id={number}
+        className={currentPage === number ? "active" : null}
+        onClick={(e) => setCurrentPage(Number(e.target.id))}
+      >
+        {number}
+      </li>
+    );
+  });
 
   return (
     <>
@@ -53,7 +81,6 @@ export default function Home() {
               <h1 className="flex items-center justify-center text-white text-center text-3xl px-6 py-6 font-bold lg:text-5xl">
                 WOOF!
               </h1>
-            
 
               {/*BUSQUEDA DE RAZAS DE PERRO*/}
 
@@ -71,9 +98,10 @@ export default function Home() {
               </form>
             </div>
 
+
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 mx-20">
               {!searched ? (
-                dogs.map((dog) => (
+                currentDogs.map((dog) => (
                   <Link
                     to={`/${dog.name}`}
                     key={dog.id}
@@ -124,7 +152,7 @@ export default function Home() {
                   ))}
                 </>
               )}
-                <p className="my-6 text-slate-500 flex items-center justify-center ">
+              <p className="my-6 text-slate-500 flex items-center justify-center ">
                 This app is powered by{" "}
                 <a
                   className="text-indigo-700 underline active:text-orange-500 "
