@@ -9,6 +9,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/:name" element={<SingleDog />}></Route>
+          
         </Routes>
       </BrowserRouter>
 

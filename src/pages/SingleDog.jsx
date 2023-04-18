@@ -43,7 +43,7 @@ export default function SingleDog() {
                 {item.name}
               </h1>
               {item.description && (
-                <p className="text-slate-500 mb-6 text-sm lg:text-base leading-relaxed">
+                <p className="text-black mb-6 text-sm lg:text-base leading-relaxed">
                   {item.description}
                 </p>
               )}
