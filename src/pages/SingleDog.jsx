@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 
+
 export default function SingleDog() {
   const [dog, setDog] = useState([]);
   const { name } = useParams();

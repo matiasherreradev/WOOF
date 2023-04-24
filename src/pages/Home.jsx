@@ -1,8 +1,8 @@
-import React from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaw } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import canin from "../assets/canin.png";
 
 export default function Home() {
@@ -10,6 +10,7 @@ export default function Home() {
   const [text, setText] = useState("");
   const [searched, setSearched] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [resultsCount, setResultsCount] = useState(0);
 
   useEffect(() => {
     const fetchDogData = async () => {
@@ -27,6 +28,7 @@ export default function Home() {
 
   useEffect(() => {
     setCurrentPage(1);
+    setDogs([]); // agregar esta línea para limpiar el estado de los perros al realizar una nueva búsqueda
   }, [searched]);
 
   const searchForDog = async () => {
@@ -36,6 +38,8 @@ export default function Home() {
       );
       const data = await res.json();
       setDogs(data);
+      setSearched(true);
+      setResultsCount(data.length);
     } catch (error) {
       console.error(error);
     }
@@ -43,48 +47,28 @@ export default function Home() {
 
   const HandleSubmit = (e) => {
     e.preventDefault();
-
     searchForDog();
-    setSearched(true);
   };
-
-  const indexOfLastDog = currentPage * 1;
-  const indexOfFirstDog = indexOfLastDog - 8;
-  const currentDogs = dogs.slice(indexOfFirstDog, indexOfLastDog);
-  const pageNumbers = [];
-
-  for (let i = 1; i <= Math.ceil(dogs.length / 8); i++) {
-    pageNumbers.push(i);
-  }
-
-  const renderPageNumbers = pageNumbers.map((number) => {
-    return (
-      <li
-        key={number}
-        id={number}
-        className={currentPage === number ? "active" : null}
-        onClick={(e) => setCurrentPage(Number(e.target.id))}
-      >
-        {number}
-      </li>
-    );
-  });
 
   return (
     <>
+      {dogs.length === 0 && (
+        <h1 className="text-center font-bold text-xl "></h1>
+      )}
+
       {!dogs ? (
-        <h1 className="flex items-center justify-center text-white text-center text-3xl px-5 h-screen font-bold uppercase">
-          Loading...
-        </h1>
+        <div>
+          <h1 className="text-center font-bold text-xl ">SIN RESULTADOS</h1>{" "}
+        </div>
       ) : (
         <>
-          <div className="flex">
-            <section className="w-4/5">
+          <div className="flex ">
+            <section className="w-full">
               <div className="text-center">
                 <div href="/" className="cursor-pointer">
                   <h1
                     onClick={() => window.location.reload()}
-                    className="flex items-center justify-center text-white  text-3xl  py-6 font-bold lg:text-5xl"
+                    className="flex items-center justify-center text-white  text-3xl  py-6 mb-6  font-bold lg:text-5xl"
                   >
                     WOOF!
                     <span>
@@ -96,108 +80,95 @@ export default function Home() {
                   </h1>
                 </div>
 
-                {/*BUSQUEDA DE RAZAS DE PERRO*/}
-
-                <form onSubmit={HandleSubmit} className="mx-auto max-w-xl my-6">
-                  <input
-                    autoComplete="off"
-                    className="w-3/4  rounded-md shadow-md px-4 py-2  bg-black text-white"
-                    type="text"
-                    name="search"
-                    id="search"
-                    placeholder="Search for a dog / breed"
-                    value={text}
-                    onChange={(e) => setText(e.target.value)}
-                  />
+                <form onSubmit={HandleSubmit} className="mx-auto max-w-xl">
+                  <label className="relative flex justify-end">
+                    <input
+                      autoComplete="off"
+                      className="w-80 mx-auto rounded-md shadow-md py-2 pl-10 bg-black text-white mb-12 "
+                      type="text"
+                      name="search"
+                      id="search"
+                      placeholder="Search for a dog / breed"
+                      value={text}
+                      onChange={(e) => setText(e.target.value)}
+                    />
+                    <FontAwesomeIcon
+                      icon={faMagnifyingGlass}
+                      className="absolute top-2 right-2 text-white text-2xl pr-6"
+                    />
+                  </label>
                 </form>
               </div>
-              <h3 className="text-black opacity-50 mb-6 ml-6">
-                *Some breed images as a sample.
-              </h3>
-             
+
               <img
                 src={canin}
                 alt="portada de pagina"
                 id="canin"
-                className="flex justify-center items-center mx-auto mb-20  object-cover "
-                
+                className="flex justify-center items-center mx-auto "
               />
-             
-              <div className="grid gap-4 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-4 mx-6">
-          
-                {!searched ? (
-                  currentDogs.map((dog) => (
-                    <Link
-                      to={`/${dog.name}`}
-                      key={dog.id}
-                      className="bg-white p-2 rounded-lg hover:bg-black hover:text-white transition-all duration-300 hover:scale-105"
-                    >
-                      {/* IMAGENES DE PERRO (tarjetas) */}
 
-                      <article>
-                        
-                        <img
-                          src={dog.image.url}
-                          alt={dog.name}
-                          loading="lazy"
-                          className="rounded-lg md:h-52 md:w-full object-scale-down py-4 "
-                        />
-                        <h3 className="my-2 text-center font-bold text-lg">
-                          {dog.name}{" "}
-                        </h3>
-                        <p className="bg-slate-600 text-center text-white py-4">
-                          Bred For: {dog.bred_for}
-                        </p>
-                      </article>
-                    </Link>
-                  ))
-                ) : (
-                  <>
-                    {dogs.map((dog) => (
-                      <Link
-                        to={`/${dog.name}`}
-                        key={dog.id}
-                        className="bg-white p-2 rounded-lg hover:bg-black hover:text-white transition-all duration-300 hover:scale-105"
-                      >
-                        {/* busqueda de razas realizada*/}
+              {!searched ? (
+                dogs.map((dog) => (
+                  <Link to={`/${dog.name}`} key={dog.id}>
+                    {/* // sin imagenes en el home */}
 
-                        <article>
-                      
+                    <article>
+                      {searched && (
+                        <div>
                           <img
-                            className="rounded-lg md:h-52 md:w-full object-cover"
-                            src={`https://cdn2.thedogapi.com/images/${dog.reference_image_id}.jpg`}
+                            src={dog.image.url}
                             alt={dog.name}
+                            loading="lazy"
+                            className="rounded-lg md:h-52 md:w-full object-scale-down py-4 "
                           />
+
                           <h3 className="my-2 text-center font-bold text-lg">
                             {dog.name}{" "}
                           </h3>
-                          <p className="bg-slate-600 text-center text-white py-2">
+                          <p className="bg-slate-600 text-center text-white py-4">
                             Bred For: {dog.bred_for}
                           </p>
-                        </article>
-                      </Link>
-                    ))}
-                  </>
-                )}
-                <p className="my-6 grid justify-start text-slate-500  ">
-                  This app is powered by{" "}
-                  <a
-                    className="text-indigo-700 underline active:text-orange-500 "
-                    href="https://thedogapi.com"
+                        </div>
+                      )}
+                    </article>
+                  </Link>
+                ))
+              ) : (
+                <div>
+                  {resultsCount > 0 ? (
+                    <h1>Se encontraron {resultsCount} resultados:</h1>
+                  ) : (
+                    <h1>Sin resultados</h1>
+                  )}
+                  <Link
                   >
-                    The dog API
-                  </a>
-                </p>
-              </div>
-            </section>
-            <section className=" flex items-center justify-end h-screen  md:pr-1 pr-6 text-2xl bg-blue-500  w-1/5">
-              <ul className="mt-52">
-                <li class="bg-gray-100 py-2">Razas</li>
-                <li class="bg-gray-100 py-2">Favoritos</li>
-                <li class="bg-indigo-600 py-2">Por Clima</li>
-                <li class="bg-gray-100 py-2">Por tamano</li>
-                <li class="bg-gray-100 py-2">Edades</li>
-              </ul>
+                    <div className="grid grid-cols-3">
+                      {/* sera aca? */}
+                      {dogs.map((dog) => (
+                        <div key={dog.id} to={`/${dog.name}`}>
+                          <article className="bg-black gap-4 m-6 p-6 rounded-md hover:bg-white hover:scale-105  transition-all duration-200">
+                            
+                            <img
+                              src={`https://cdn2.thedogapi.com/images/${dog.reference_image_id}.jpg`}
+                              alt={dog.name}
+                              className="rounded md:h-72 w-full object-cover"
+                            />
+                            <div className="bg-slate-600 p-6">
+                              <h3 className="text-white text-lg font-bold mt-4 hover:text-orange-500">
+                                {dog.name}
+                              </h3>
+                              <p className="text-slate-400 hover:text-orange-500">
+                                Bred For: {dog.bred_for}
+                              </p>
+                            </div>
+                          </article>
+                        </div>
+                      ))}
+                    </div>
+                  </Link>
+                  )
+                </div>
+              )}
             </section>
           </div>
         </>
