@@ -140,12 +140,14 @@ export default function Home() {
                   ) : (
                     <h1>Sin resultados</h1>
                   )}
-                  <Link
-                  >
+                  
                     <div className="grid grid-cols-3">
                       {/* sera aca? */}
                       {dogs.map((dog) => (
-                        <div key={dog.id} to={`/${dog.name}`}>
+                      <Link
+                      key={dog.id} to={`/${dog.name}`}
+                      >
+                        <div >
                           <article className="bg-black gap-4 m-6 p-6 rounded-md hover:bg-white hover:scale-105  transition-all duration-200">
                             
                             <img
@@ -163,9 +165,10 @@ export default function Home() {
                             </div>
                           </article>
                         </div>
+                  </Link>
                       ))}
                     </div>
-                  </Link>
+               
                   )
                 </div>
               )}
