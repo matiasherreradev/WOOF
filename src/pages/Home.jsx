@@ -57,13 +57,11 @@ export default function Home() {
       )}
 
       {!dogs ? (
-        <div>
-          <h1 className="text-center font-bold text-xl ">SIN RESULTADOS</h1>{" "}
-        </div>
+        <div></div>
       ) : (
         <>
-          <div className="flex ">
-            <section className="w-full">
+          <div>
+            <section className="w-10/12 mx-auto">
               <div className="text-center">
                 <div href="/" className="cursor-pointer">
                   <h1
@@ -80,11 +78,11 @@ export default function Home() {
                   </h1>
                 </div>
 
-                <form onSubmit={HandleSubmit} className="mx-auto max-w-xl">
-                  <label className="relative flex justify-end">
+                <form onSubmit={HandleSubmit}>
+                  <label className="relative   rounded-full  py-2 pl-4 bg-black text-white mb-6  w-80 mx-auto grid justify-items-center text-center">
                     <input
                       autoComplete="off"
-                      className="w-80 mx-auto rounded-md shadow-md py-2 pl-10 bg-black text-white mb-12 "
+                      className="bg-black rounded-full pr-24"
                       type="text"
                       name="search"
                       id="search"
@@ -94,19 +92,22 @@ export default function Home() {
                     />
                     <FontAwesomeIcon
                       icon={faMagnifyingGlass}
-                      className="absolute top-2 right-2 text-white text-2xl pr-6"
+                      className="absolute top-2 right-2 text-orange-600 text-2xl pr-6"
                     />
                   </label>
                 </form>
               </div>
+              <p className="w-3/4 sm:w-4/5 text-sm mx-auto opacity-50 text-center">
+                * Las busquedas de razas deben realizarse en ingles y
+                presionando 2 veces Enter!
+              </p>
 
               <img
                 src={canin}
                 alt="portada de pagina"
                 id="canin"
-                className="flex justify-center items-center mx-auto "
+                className="flex justify-center items-center mx-auto mb-4 "
               />
-
               {!searched ? (
                 dogs.map((dog) => (
                   <Link to={`/${dog.name}`} key={dog.id}>
@@ -136,24 +137,30 @@ export default function Home() {
               ) : (
                 <div>
                   {resultsCount > 0 ? (
-                    <h1>Se encontraron {resultsCount} resultados:</h1>
+                    <h1 className="text-center  rounded-full bg-green-600 text-white max-w-xs mx-auto px-4 py-2  mb-10    ">
+                      Se encontraron {resultsCount} resultados:
+                    </h1>
                   ) : (
-                    <h1>Sin resultados</h1>
+                    <h1 className="text-center rounded-full bg-red-900 drop-shadow-2xl text-white max-w-xs mx-auto px-4 py-2      ">
+                      Sin resultados
+                    </h1>
                   )}
+
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 ">
                   
-                    <div className="grid grid-cols-3">
-                      {/* sera aca? */}
-                      {dogs.map((dog) => (
-                      <Link
-                      key={dog.id} to={`/${dog.name}`}
-                      >
-                        <div >
-                          <article className="bg-black gap-4 m-6 p-6 rounded-md hover:bg-white hover:scale-105  transition-all duration-200">
-                            
+                    {dogs.map((dog) => (
+                      <Link key={dog.id} to={`/${dog.name}`}>
+                        <div>
+                          <div id="arrow">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                          <article className="bg-black  m-4 p-4 rounded-md hover:bg-white hover:scale-105  transition-all duration-200 ">
                             <img
                               src={`https://cdn2.thedogapi.com/images/${dog.reference_image_id}.jpg`}
                               alt={dog.name}
-                              className="rounded md:h-72 w-full object-cover"
+                              className="rounded md:h-60 w-full object-cover"
                             />
                             <div className="bg-slate-600 p-6">
                               <h3 className="text-white text-lg font-bold mt-4 hover:text-orange-500">
@@ -165,11 +172,9 @@ export default function Home() {
                             </div>
                           </article>
                         </div>
-                  </Link>
-                      ))}
-                    </div>
-               
-                  )
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               )}
             </section>

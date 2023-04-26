@@ -10,8 +10,8 @@ https://642e575685e1605b22b2fa2d--deperros.netlify.app/
 
 
 
----link a las paginas
----agregar flecha parpadeante debajo de la imagen con los resultados
+---hacer una ola tipo havana cacao
+
 ---darle estilos y hacerlo responsive
 
 

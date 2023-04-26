@@ -23,15 +23,19 @@ export default function SingleDog() {
   }, [name]);
 
   return (
+
+
     <>
+    
       <section className="  text-white max-w-5xl  flex items-center justify-center 2xl:h-screen mx-auto z-10">
         {dog.map((item) => (
           <div
+          
             key={item.id}
             className="grid grid-cols-1 gap-8 p-8 md:grid-cols-2 md:place-items-center"
           >
 
-{/* IMAGEN DEL PERRO SELECCIONADO*/}
+
 
             <article className="grid items-center justify-center ">
               <img className=""
