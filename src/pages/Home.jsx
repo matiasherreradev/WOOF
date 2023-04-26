@@ -90,10 +90,12 @@ export default function Home() {
                       value={text}
                       onChange={(e) => setText(e.target.value)}
                     />
-                    <FontAwesomeIcon
-                      icon={faMagnifyingGlass}
-                      className="absolute top-2 right-2 text-orange-600 text-2xl pr-6"
-                    />
+                  <FontAwesomeIcon
+  icon={faMagnifyingGlass}
+  className="absolute top-2 right-2 text-orange-600 text-2xl pr-6"
+  onClick={HandleSubmit}
+/>
+
                   </label>
                 </form>
               </div>
@@ -151,11 +153,12 @@ export default function Home() {
                     {dogs.map((dog) => (
                       <Link key={dog.id} to={`/${dog.name}`}>
                         <div>
-                          <div id="arrow">
+                        <div id="arrow">
                     <span></span>
                     <span></span>
                     <span></span>
                   </div>
+                          
                           <article className="bg-black  m-4 p-4 rounded-md hover:bg-white hover:scale-105  transition-all duration-200 ">
                             <img
                               src={`https://cdn2.thedogapi.com/images/${dog.reference_image_id}.jpg`}
