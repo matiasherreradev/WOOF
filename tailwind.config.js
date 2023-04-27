@@ -5,6 +5,7 @@ export default {
     extend: {
       fontFamily: {
         'sans': ['Montserrat', 'Lato', 'sans-serif'],
+        'sans-Dancing': ['Dancing Script', 'sans-serif'],
       }
   },
   plugins: [],

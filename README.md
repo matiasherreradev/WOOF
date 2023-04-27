@@ -12,9 +12,9 @@ https://642e575685e1605b22b2fa2d--deperros.netlify.app/
 
 
 ---la barra de busqueda se sale un poquito
----darle estilos y hacerlo responsive
----darle estilo a las descripciones de single dog
----hacer funcional la lupa de busqueda
+
+
+
 
 
 

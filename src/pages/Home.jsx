@@ -79,7 +79,7 @@ export default function Home() {
                 </div>
 
                 <form onSubmit={HandleSubmit}>
-                  <label className="relative   rounded-full  py-2 pl-4 bg-black text-white mb-6  w-80 mx-auto grid justify-items-center text-center">
+                  <label className="relative   rounded-full  py-2 pl-4 bg-black text-white mb-6  w-80 mx-auto grid justify-items-starttext-center">
                     <input
                       autoComplete="off"
                       className="bg-black rounded-full pr-24"
@@ -100,8 +100,7 @@ export default function Home() {
                 </form>
               </div>
               <p className="w-3/4 sm:w-4/5 text-sm mx-auto opacity-50 text-center">
-                * Las busquedas de razas deben realizarse en ingles y
-                presionando 2 veces Enter!
+                * Las busquedas de razas deben realizarse en ingles!
               </p>
 
               <img
@@ -110,6 +109,8 @@ export default function Home() {
                 id="canin"
                 className="flex justify-center items-center mx-auto mb-4 "
               />
+
+              {/* <p className="w-3/4  text-justify mx-auto font-sans-Dancing text-4xl leading-relaxed">Dogs are known for their unconditional love and loyalty towards their owners. Their genuine love can be seen in the way they wag their tails, jump with joy, and snuggle up close..</p> */}
               {!searched ? (
                 dogs.map((dog) => (
                   <Link to={`/${dog.name}`} key={dog.id}>
@@ -143,12 +144,12 @@ export default function Home() {
                       Se encontraron {resultsCount} resultados:
                     </h1>
                   ) : (
-                    <h1 className="text-center rounded-full bg-red-900 drop-shadow-2xl text-white max-w-xs mx-auto px-4 py-2      ">
+                    <h1 className="text-center rounded-full bg-red-700 drop-shadow-2xl text-white max-w-xs mx-auto px-4 py-2      ">
                       Sin resultados
                     </h1>
                   )}
 
-                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 ">
+                  <div className="grid  md:grid-cols-2  mx-auto sm:grid-cols-2 lg:grid-cols-4 ">
                   
                     {dogs.map((dog) => (
                       <Link key={dog.id} to={`/${dog.name}`}>
@@ -165,7 +166,7 @@ export default function Home() {
                               alt={dog.name}
                               className="rounded md:h-60 w-full object-cover"
                             />
-                            <div className="bg-slate-600 p-6">
+                            <div className="bg-slate-600 p-4 h-40 overflow-hidden">
                               <h3 className="text-white text-lg font-bold mt-4 hover:text-orange-500">
                                 {dog.name}
                               </h3>

@@ -32,58 +32,60 @@ export default function SingleDog() {
           <div
           
             key={item.id}
-            className="grid grid-cols-1 gap-8 p-8 md:grid-cols-2 md:place-items-center"
+            className="grid grid-cols-1 gap-8 p-8 md:grid-cols-2 md:place-items-center md:items-center md:justify-center md:my-60
+           "
           >
 
 
 
-            <article className="grid items-center justify-center ">
-              <img className=""
+            <article className="grid items-center justify-center  ">
+              <img className="shadow-2xl rounded-md "
                 src={`https://cdn2.thedogapi.com/images/${item.reference_image_id}.jpg`}
                 alt={item.name}
               />
             </article>
-            <article className="">
-              <h1 className=" text-2xl font-bold  md:text-3xl text-white lg:text-4xl mb-8 ">
+            <article className="flex flex-col gap-4 items-center">
+
+              <h1 className="underline  text-2xl font-bold  md:text-3xl text-white lg:text-4xl mb-2 ">
                 {item.name}
               </h1>
               {item.description && (
-                <p className="text-black mb-6 text-sm lg:text-base leading-relaxed">
+                <p className="text-black mb-2 text-sm lg:text-base leading-relaxed ">
                   {item.description}
                 </p>
               )}
-              <h3 className="font-bold mb-4">Info:</h3>
-              <ul className="text-sm leading-loose mb-4">
+              <h3 className="text-slate-800 text-2xl ">Info:</h3>
+              <ul className="text-sm leading-loose mb-2 ">
                 <li>
-                  <span className="font-bold">Bred for: </span> {item.bred_for}
+                  <span className=" text-slate-800">Bred for: </span> {item.bred_for}
                 </li>
                 <li>
-                  <span className="font-bold"> Height:</span>{" "}
+                  <span className=" text-slate-800"> Height:</span>{" "}
                   {item.height.metric} cm
                 </li>
                 <li>
-                  <span className="font-bold">Weight: </span>
+                  <span className=" text-slate-800">Weight: </span>
                   {item.weight.metric} kgs
                 </li>
                 <li>
-                  <span className="font-bold">Breed Group:</span>{" "}
+                  <span className=" text-slate-800">Breed Group:</span>{" "}
                   {item.breed_group}
                 </li>
                 <li>
-                  <span className="font-bold">Lifespan:</span> {item.life_span}
+                  <span className=" text-slate-800">Lifespan:</span> {item.life_span}
                 </li>
                 <li>
-                  <span className="font-bold">Temperament:</span>{" "}
+                  <span className=" text-slate-800">Temperament:</span>{" "}
                   {item.temperament}
                 </li>
               </ul>
 
               <Link
                 to="/"
-                className="inline-block bg-amber-900 rounded-md px-4 py-1 text-white hover:bg-amber-800 transition-all duration-200"
+                className="text-center  rounded-full bg-black text-white max-w-xs mx-auto px-4 py-2     "
               >
                 {" "}
-                &larr; Back
+                &larr; Back to Home
               </Link>
             </article>
           </div>
